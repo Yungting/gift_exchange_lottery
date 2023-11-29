@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽籤網站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        select, button {
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>抽籤網站</h1>
+
+    <label for="people">選擇你的名字：</label>
+    <select id="people">
+        <!-- 在這裡插入20個人的名字選項 -->
+    </select>
+
+    <br>
+
+    <button onclick="drawLottery()">我要抽籤</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        // 20個假資料名字
+        const peopleList = ["Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7", "Person 8", "Person 9", "Person 10", "Person 11", "Person 12", "Person 13", "Person 14", "Person 15", "Person 16", "Person 17", "Person 18", "Person 19", "Person 20"];
+
+        // 將人物名字填入下拉選單
+        const peopleDropdown = document.getElementById("people");
+        peopleList.forEach(person => {
+            const option = document.createElement("option");
+            option.text = person;
+            peopleDropdown.add(option);
+        });
+
+        // 抽籤函數
+        function drawLottery() {
+            const selectedPerson = peopleDropdown.value;
+            const remainingPeople = peopleList.filter(person => person !== selectedPerson);
+            const randomIndex = Math.floor(Math.random() * remainingPeople.length);
+            const result = remainingPeople[randomIndex];
+
+            document.getElementById("result").innerText = `抽中的人是：${result}`;
+        }
+    </script>
+
+</body>
+</html>
