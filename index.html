@@ -6,14 +6,74 @@
     <title>抽籤網站</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
             margin: 50px;
+            background-color: #E6F7FF; /* 淡藍色背景，代表冰雪節慶氛圍 */
+        }
+
+        h1 {
+            color: #ff4500; /* 橙紅色，代表聖誕節 */
         }
 
         select, button {
             margin: 10px;
             padding: 5px;
+        }
+
+        #result {
+            font-size: 1.5em;
+            color: #228B22; /* 深綠色，代表聖誕樹 */
+        }
+
+        #gift {
+            width: 100px;
+            height: 100px;
+            background-color: #FFD700; /* 金色，代表禮物 */
+            border: 2px solid #8B4513; /* 棕色，禮物的邊框 */
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        #santa {
+            width: 100px;
+            height: 100px;
+            background-color: #FF0000; /* 紅色，代表聖誕老人的外衣顏色 */
+            border-radius: 50%;
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        #santa-beard {
+            width: 60px;
+            height: 30px;
+            background-color: #fff; /* 白色，代表聖誕老人的胡子顏色 */
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        #santa-hat {
+            width: 100px;
+            height: 40px;
+            background-color: #FF0000; /* 紅色，聖誕帽的底色 */
+            position: absolute;
+            top: 0;
+        }
+
+        #santa-hat::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 40px solid #ffffff; /* 白色，聖誕帽的毛邊顏色 */
+            position: absolute;
+            top: -40px;
+            left: 0;
         }
     </style>
 </head>
@@ -31,6 +91,12 @@
     <button onclick="drawLottery()">我要抽籤</button>
 
     <h2 id="result"></h2>
+
+    <div id="gift"></div>
+    <div id="santa">
+        <div id="santa-hat"></div>
+        <div id="santa-beard"></div>
+    </div>
 
     <script>
         // 20個假資料名字
@@ -57,3 +123,4 @@
 
 </body>
 </html>
+
