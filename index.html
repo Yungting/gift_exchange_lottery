@@ -4,83 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>抽籤網站</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 50px;
-            background-color: #E6F7FF; /* 淡藍色背景，代表冰雪節慶氛圍 */
-        }
-
-        h1 {
-            color: #ff4500; /* 橙紅色，代表聖誕節 */
-        }
-
-        select, button {
-            margin: 10px;
-            padding: 5px;
-        }
-
-        #result {
-            font-size: 1.5em;
-            color: #228B22; /* 深綠色，代表聖誕樹 */
-        }
-
-        #gift {
-            width: 100px;
-            height: 100px;
-            background-color: #FFD700; /* 金色，代表禮物 */
-            border: 2px solid #8B4513; /* 棕色，禮物的邊框 */
-            position: relative;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        #santa {
-            width: 100px;
-            height: 100px;
-            background-color: #FF0000; /* 紅色，代表聖誕老人的外衣顏色 */
-            border-radius: 50%;
-            position: relative;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        #santa-beard {
-            width: 60px;
-            height: 30px;
-            background-color: #fff; /* 白色，代表聖誕老人的胡子顏色 */
-            position: absolute;
-            top: 40px;
-            left: 20px;
-            z-index: 1;
-        }
-
-        #santa-hat {
-            width: 100px;
-            height: 40px;
-            background-color: #FF0000; /* 紅色，聖誕帽的底色 */
-            position: absolute;
-            top: 0;
-        }
-
-        #santa-hat::before {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 40px solid #ffffff; /* 白色，聖誕帽的毛邊顏色 */
-            position: absolute;
-            top: -40px;
-            left: 0;
-        }
-    </style>
+    <script src="lottery.js"></script>
 </head>
 <body>
-
     <h1>抽籤網站</h1>
-
     <label for="people">選擇你的名字：</label>
     <select id="people">
         <!-- 在這裡插入20個人的名字選項 -->
@@ -91,33 +18,27 @@
     <button onclick="drawLottery()">我要抽籤</button>
 
     <h2 id="result"></h2>
-
-    <div id="gift"></div>
-    <div id="santa">
-        <div id="santa-hat"></div>
-        <div id="santa-beard"></div>
-    </div>
-
     <script>
-        // 20個假資料名字
-        const peopleList = ["Person 1", "Person 2", "Person 3", "Person 4", "Person 5", "Person 6", "Person 7", "Person 8", "Person 9", "Person 10", "Person 11", "Person 12", "Person 13", "Person 14", "Person 15", "Person 16", "Person 17", "Person 18", "Person 19", "Person 20"];
-
         // 將人物名字填入下拉選單
         const peopleDropdown = document.getElementById("people");
-        peopleList.forEach(person => {
+        nameList.forEach(person => {
             const option = document.createElement("option");
             option.text = person;
+            option.value = randomNameList.indexOf(person) + 1;
             peopleDropdown.add(option);
         });
+
+        peopleList.forEach((item, index) => {
+            item.name = randomNameList[index]
+        })
 
         // 抽籤函數
         function drawLottery() {
             const selectedPerson = peopleDropdown.value;
-            const remainingPeople = peopleList.filter(person => person !== selectedPerson);
-            const randomIndex = Math.floor(Math.random() * remainingPeople.length);
-            const result = remainingPeople[randomIndex];
+            const person = peopleList.find(item => item.id === Number(selectedPerson))
+            const findPerson = peopleList.find(item => item.id === Number(person.gift_to))
 
-            document.getElementById("result").innerText = `抽中的人是：${result}`;
+            document.getElementById("result").innerText = `抽中的人是：${findPerson.name}`;
         }
     </script>
 
